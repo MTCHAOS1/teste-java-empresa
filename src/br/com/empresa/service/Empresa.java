@@ -10,9 +10,15 @@ import java.util.List;
 public class Empresa {
     private final List<Funcionario> funcionarios = new ArrayList<>();
 
-    // Adicionar funcionário
-    public void adicionarFuncionario(Funcionario f) {
+    // Adicionar funcionário (com validação de ID único)
+    public boolean adicionarFuncionario(Funcionario f) {
+        for (Funcionario existente : funcionarios) {
+            if (existente.getId() == f.getId()) {
+                return false;
+            }
+        }
         funcionarios.add(f);
+        return false;
     }
 
     // Remover funcionário pelo ID
@@ -21,9 +27,9 @@ public class Empresa {
     }
 
     // Buscar funcionário pelo nome
-    public Funcionario buscarFuncionario(int id) {
+    public Funcionario buscarFuncionario(String nome) {
         for (Funcionario f : funcionarios) {
-            if (f.getId()==(id)) {
+            if (f.getNome().equalsIgnoreCase(nome)) {
                 return f;
             }
         }
@@ -40,10 +46,23 @@ public class Empresa {
         return soma / funcionarios.size();
     }
 
-    // Listar ordenados por salário (Stream.sorted)
-    public List<Funcionario> ListarFuncionarios() {
+    // Listar ordenados por salário (usando Collections.sort)
+    public List<Funcionario> listarOrdenadosPorSalarioSort() {
+        List<Funcionario> copia = new ArrayList<>(funcionarios);
+        Collections.sort(copia, Comparator.comparingDouble(Funcionario::getSalario).reversed());
+        return copia;
+    }
+
+    // Listar ordenados por salário (usando Stream.sorted)
+    public List<Funcionario> listarOrdenadosPorSalarioStream() {
         return funcionarios.stream()
                 .sorted(Comparator.comparingDouble(Funcionario::getSalario).reversed())
                 .toList();
     }
+
+    // Getter da lista original
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
 }

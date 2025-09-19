@@ -7,6 +7,7 @@ import java.util.Scanner;
 public record AdicionarFuncionario(Empresa empresa, Scanner sc) {
 
     public void executar() {
+        // Validação do ID
         int id;
         while (true) {
             System.out.print("ID (máx. 6 dígitos): ");
@@ -15,10 +16,11 @@ public record AdicionarFuncionario(Empresa empresa, Scanner sc) {
                 id = Integer.parseInt(idInput);
                 break;
             } else {
-                System.out.println("⚠ ID inválido! Digite até 6 dígitos numéricos.");
+                System.out.println("⚠ ID inválido! Digite apenas números (até 6 dígitos).");
             }
         }
 
+        // Validação do nome
         String nome;
         while (true) {
             System.out.print("Nome (máx. 30 caracteres): ");
@@ -26,9 +28,10 @@ public record AdicionarFuncionario(Empresa empresa, Scanner sc) {
             if (nome.matches("[a-zA-ZÀ-ÿ\\s]+") && nome.length() <= 30) {
                 break;
             }
-            System.out.println("⚠ Nome inválido! Apenas letras e até 30 caracteres.");
+            System.out.println("⚠ Nome inválido! Apenas letras/espaços e até 30 caracteres.");
         }
 
+        // Validação do cargo
         String cargo;
         while (true) {
             System.out.print("Cargo (máx. 30 caracteres): ");
@@ -36,9 +39,10 @@ public record AdicionarFuncionario(Empresa empresa, Scanner sc) {
             if (cargo.matches("[a-zA-ZÀ-ÿ\\s]+") && cargo.length() <= 30) {
                 break;
             }
-            System.out.println("⚠ Cargo inválido! Apenas letras e até 30 caracteres.");
+            System.out.println("⚠ Cargo inválido! Apenas letras/espaços e até 30 caracteres.");
         }
 
+        // Validação do salário
         double salario;
         while (true) {
             try {
@@ -47,13 +51,18 @@ public record AdicionarFuncionario(Empresa empresa, Scanner sc) {
                 sc.nextLine();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("⚠ Salário inválido! Digite um número válido.");
+                System.out.println("⚠ Salário inválido! Digite um número (ex: 2500.50).");
                 sc.nextLine();
             }
         }
 
+        // Criar funcionário e tentar adicionar
         Funcionario f = new Funcionario(id, nome, cargo, salario);
-        empresa.adicionarFuncionario(f);
-        System.out.println("✅ Funcionário adicionado com sucesso!");
+
+        if (empresa.adicionarFuncionario(f)) {
+            System.out.println("✅ Funcionário adicionado!");
+        } else {
+            System.out.println("⚠ Já existe um funcionário com esse ID! Cadastro cancelado.");
+        }
     }
 }
