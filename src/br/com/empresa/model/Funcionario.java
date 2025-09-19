@@ -1,12 +1,25 @@
 package br.com.empresa.model;
 
+/**
+ * Representa um funcionário de uma empresa.
+ * Contém informações básicas: ID, nome, cargo e salário.
+ */
 public class Funcionario {
-    private int id;
-    private String nome;
-    private String cargo;
-    private double salario;
 
-    // Construtor
+    // Atributos do funcionário
+    private int id;           // Identificador único do funcionário
+    private String nome;      // Nome do funcionário
+    private String cargo;     // Cargo/função do funcionário
+    private double salario;   // Salário do funcionário
+
+    /**
+     * Construtor da classe Funcionario.
+     *
+     * @param id      Identificador único do funcionário
+     * @param nome    Nome do funcionário
+     * @param cargo   Cargo/função do funcionário
+     * @param salario Salário do funcionário
+     */
     public Funcionario(int id, String nome, String cargo, double salario) {
         this.id = id;
         this.nome = nome;
@@ -14,7 +27,10 @@ public class Funcionario {
         this.salario = salario;
     }
 
-    // Getters e Setters (Encapsulamento)
+    // =======================
+    // Getters e Setters
+    // =======================
+
     public int getId() {
         return id;
     }
@@ -47,7 +63,15 @@ public class Funcionario {
         this.salario = salario;
     }
 
-    // Sobrescrita do metodo toString()
+    // =======================
+    // Sobrescrita do toString
+    // =======================
+
+    /**
+     * Retorna uma representação textual do funcionário.
+     *
+     * @return String com informações do funcionário formatadas
+     */
     @Override
     public String toString() {
         return "ID: " + id +
