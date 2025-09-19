@@ -14,7 +14,7 @@ public record BuscarFuncionario(Empresa empresa, Scanner sc) {
         }
         int id = Integer.parseInt(idInput);
 
-        Funcionario f = empresa.buscarFuncionario(String.valueOf(id));
+        Funcionario f = empresa.buscarFuncionario(id);
         if (f != null) {
             System.out.println("✅ Funcionário encontrado: " + f);
         } else {

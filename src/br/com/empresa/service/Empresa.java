@@ -18,7 +18,7 @@ public class Empresa {
             }
         }
         funcionarios.add(f);
-        return false;
+        return true;
     }
 
     // Remover funcionário pelo ID
@@ -27,9 +27,9 @@ public class Empresa {
     }
 
     // Buscar funcionário pelo nome
-    public Funcionario buscarFuncionario(String nome) {
+    public Funcionario buscarFuncionario(int id) {
         for (Funcionario f : funcionarios) {
-            if (f.getNome().equalsIgnoreCase(nome)) {
+            if (f.getId()==id) {
                 return f;
             }
         }
@@ -62,6 +62,7 @@ public class Empresa {
 
     // Getter da lista original
     public List<Funcionario> getFuncionarios() {
+
         return funcionarios;
     }
 

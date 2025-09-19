@@ -6,7 +6,7 @@ import java.util.List;
 public record ListarFuncionarios(Empresa empresa) {
 
     public void executar() {
-        List<Funcionario> lista = empresa.ListarFuncionarios();
+        List<Funcionario> lista = empresa.listarOrdenadosPorSalarioSort();
         if (lista.isEmpty()) {
             System.out.println("⚠ Nenhum funcionário cadastrado.");
         } else {
